@@ -23,9 +23,15 @@ class Project
     private $name;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default" : 0})
      */
     private $archived;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Manager::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $id_manager;
 
     public function getId(): ?int
     {
@@ -52,6 +58,18 @@ class Project
     public function setArchived(bool $archived): self
     {
         $this->archived = $archived;
+
+        return $this;
+    }
+
+    public function getIdManager(): ?Manager
+    {
+        return $this->id_manager;
+    }
+
+    public function setIdManager(?Manager $id_manager): self
+    {
+        $this->id_manager = $id_manager;
 
         return $this;
     }

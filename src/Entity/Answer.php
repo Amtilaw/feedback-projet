@@ -18,7 +18,7 @@ class Answer
     private $id;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default" : 0})
      */
     private $archived;
 
@@ -56,6 +56,12 @@ class Answer
      * @ORM\Column(type="integer")
      */
     private $q7;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=project::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $id_project;
 
     public function getId(): ?int
     {
@@ -154,6 +160,18 @@ class Answer
     public function setQ7(int $q7): self
     {
         $this->q7 = $q7;
+
+        return $this;
+    }
+
+    public function getIdProject(): ?project
+    {
+        return $this->id_project;
+    }
+
+    public function setIdProject(?project $id_project): self
+    {
+        $this->id_project = $id_project;
 
         return $this;
     }
