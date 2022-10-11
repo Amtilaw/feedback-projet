@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ProjetRepository;
+use App\Repository\ProjectRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ProjetRepository::class)
+ * @ORM\Entity(repositoryClass=ProjectRepository::class)
  */
-class Projet
+class Project
 {
     /**
      * @ORM\Id
@@ -23,14 +23,15 @@ class Projet
     private $name;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default" : 0})
      */
     private $archived;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Manager::class, inversedBy="projets")
+     * @ORM\ManyToOne(targetEntity=Manager::class)
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $idManager;
+    private $id_manager;
 
     public function getId(): ?int
     {
@@ -63,12 +64,12 @@ class Projet
 
     public function getIdManager(): ?Manager
     {
-        return $this->idManager;
+        return $this->id_manager;
     }
 
-    public function setIdManager(?Manager $idManager): self
+    public function setIdManager(?Manager $id_manager): self
     {
-        $this->idManager = $idManager;
+        $this->id_manager = $id_manager;
 
         return $this;
     }

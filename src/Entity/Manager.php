@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\ManagerRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -25,14 +23,9 @@ class Manager
     private $password;
 
     /**
-     * @ORM\OneToMany(targetEntity=Projet::class, mappedBy="idManager")
+     * @ORM\Column(type="string", length=255)
      */
-    private $projets;
-
-    public function __construct()
-    {
-        $this->projets = new ArrayCollection();
-    }
+    private $login;
 
     public function getId(): ?int
     {
@@ -51,32 +44,14 @@ class Manager
         return $this;
     }
 
-    /**
-     * @return Collection<int, Projet>
-     */
-    public function getProjets(): Collection
+    public function getLogin(): ?string
     {
-        return $this->projets;
+        return $this->login;
     }
 
-    public function addProjet(Projet $projet): self
+    public function setLogin(string $login): self
     {
-        if (!$this->projets->contains($projet)) {
-            $this->projets[] = $projet;
-            $projet->setIdManager($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProjet(Projet $projet): self
-    {
-        if ($this->projets->removeElement($projet)) {
-            // set the owning side to null (unless already changed)
-            if ($projet->getIdManager() === $this) {
-                $projet->setIdManager(null);
-            }
-        }
+        $this->login = $login;
 
         return $this;
     }
