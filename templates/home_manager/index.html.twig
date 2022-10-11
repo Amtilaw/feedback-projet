@@ -38,17 +38,37 @@
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-						<label class="col-form-label col-form-label-lg mt-4" for="inputLarge">Project name</label>
-						<input class="form-control form-control-lg" type="text" placeholder="feedback project" id="inputLarge">
+						<label class="col-form-label col-form-label-lg mt-4" for="project">Project name</label>
+						<input class="form-control form-control-lg" type="text" placeholder="feedback project" id="project">
 					</div>
 				</div>
 				<div class="modal-footer">
-					<a href=" {{ path('add_project') }}">
-						<button type="button" class="btn btn-primary">Save changes</button>
-					</a>
+					<button type="button" class="btn btn-primary" onclick="addProject()">Save changes</button>
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
 	</div>
+	<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+	<script>
+		function addProject() {
+let project = document.getElementById("project").value;
+
+$.ajax({
+type: "post",
+url: "/addProject",
+data: {
+name: project
+}
+}).done(function (response, textStatus, jqxhr) {
+console.log("project added");
+window.location.href = "/home/manager";
+}).fail(function (response) {
+setTimeout(function () {
+alert(response.responseJSON.message);
+}, 500);
+}).always(function () {});
+
+}
+	</script>
 {% endblock %}

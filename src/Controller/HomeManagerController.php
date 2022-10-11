@@ -4,10 +4,15 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Project;
 use App\Repository\ProjectRepository;
+use App\Entity\Manager;
+use App\Repository\ManagerRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 class HomeManagerController extends AbstractController
 {
@@ -26,8 +31,16 @@ class HomeManagerController extends AbstractController
     /**
      * @Route("/addProject", name="add_project")
      */
-    public function addProject(ProjectRepository $projectRepository): Response
+    public function addProject(ProjectRepository $projectRepository, Request $request,ManagerRepository $managerRepository, EntityManagerInterface $entityManager): Response
     {
-        return $this->redirectToRoute('app_home_manager');
+
+        $manager = $managerRepository->find(1);
+        $project = new Project();
+        $project->setName($request->request->get("name"));
+        $project->setArchived(0);
+        $project->setIdManager($manager);
+        $entityManager->persist($project);
+        $entityManager->flush();
+        return new JsonResponse(1);
     }
 }
