@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ProjetRepository;
+use App\Repository\ProjectRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ProjetRepository::class)
+ * @ORM\Entity(repositoryClass=ProjectRepository::class)
  */
-class Projet
+class Project
 {
     /**
      * @ORM\Id
@@ -26,11 +26,6 @@ class Projet
      * @ORM\Column(type="boolean")
      */
     private $archived;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Manager::class, inversedBy="projets")
-     */
-    private $idManager;
 
     public function getId(): ?int
     {
@@ -57,18 +52,6 @@ class Projet
     public function setArchived(bool $archived): self
     {
         $this->archived = $archived;
-
-        return $this;
-    }
-
-    public function getIdManager(): ?Manager
-    {
-        return $this->idManager;
-    }
-
-    public function setIdManager(?Manager $idManager): self
-    {
-        $this->idManager = $idManager;
 
         return $this;
     }
