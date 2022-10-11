@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Home Manager
+
+
+{% endblock %}
+
+{% block body %}
+
+
+	<div class="container">
+		<div class="d-flex justify-content-end">
+			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal">Add new project</button>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="d-flex justify-content-center">
+			{% for project in projects %}
+				<a href="">
+					<div class="card text-white bg-info mb-3" style="max-width: 20rem;">
+						<div class="card-header">{{project.name}}</div>
+					</div>
+				</a>
+			{% endfor %}
+		</div>
+	</div>
+
+	<div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Add project</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true"></span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label class="col-form-label col-form-label-lg mt-4" for="inputLarge">Project name</label>
+						<input class="form-control form-control-lg" type="text" placeholder="feedback project" id="inputLarge">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<a href=" {{ path('add_project') }}">
+						<button type="button" class="btn btn-primary">Save changes</button>
+					</a>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
