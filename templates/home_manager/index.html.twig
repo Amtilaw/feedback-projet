@@ -6,6 +6,10 @@
 
 {% endblock %}
 
+{% block javascripts %}
+	{{ parent() }}
+{% endblock %}
+
 {% block body %}
 
 
@@ -72,3 +76,5 @@ alert(response.responseJSON.message);
 }
 	</script>
 {% endblock %}
+
+
