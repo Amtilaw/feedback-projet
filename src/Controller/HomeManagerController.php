@@ -43,7 +43,7 @@ class HomeManagerController extends AbstractController
     public function addProject(ProjectRepository $projectRepository, Request $request,ManagerRepository $managerRepository, EntityManagerInterface $entityManager): Response
     {
 
-        $manager = $managerRepository->find(1);
+        $manager = $managerRepository->find($_SESSION['idManager']);
         $project = new Project();
         $project->setName($request->request->get("name"));
         $project->setArchived(0);
