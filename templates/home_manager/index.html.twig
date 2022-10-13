@@ -102,10 +102,21 @@
 											{% endfor %}
 										</div>
 										<div class="modal-footer">
+										<form method="post" action="{{ url('indexLogin') }}archiveAnswers">
+												<input type="text" value="{{project.id}}" name="projectId" hidden>
+												<button type="submit" class="btn btn-danger btn-lg">Archiver les réponses</button>
+												
+											</form>
 											<form method="post" action="{{ url('indexLogin') }}archiveProject">
 												<input type="text" value="{{project.id}}" name="projectId" hidden>
 												<button type="submit" class="btn btn-danger btn-lg">Effacer le projet</button>
+<<<<<<< HEAD
+=======
+												
+>>>>>>> d4feee0dd1f93905d849b8d3d34c9ae86db15917
 											</form>
+											
+											
 										</div>
 									</div>
 								</div>

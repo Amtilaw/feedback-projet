@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\AnswerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -67,6 +68,21 @@ class HomeManagerController extends AbstractController
         $idProject = intval($request->request->get('projectId'));
         $project = $projectRepository->find($idProject);
         $project->setArchived(1);
+        $entityManager->flush();
+        return $this->redirectToRoute('app_home_manager');
+    }
+
+    /**
+     * @Route("/archiveAnswers", name="archive_answers")
+     */
+    public function archiveAnswers(AnswerRepository $answerRepository, Request $request, EntityManagerInterface $entityManager): Response
+    {
+
+        $idProject = intval($request->request->get('projectId'));
+        $answers = $answerRepository->findByProjectId($idProject);
+        foreach($answers as $oneAnswer){
+            $oneAnswer->setArchived(1);
+        }
         $entityManager->flush();
         return $this->redirectToRoute('app_home_manager');
     }
