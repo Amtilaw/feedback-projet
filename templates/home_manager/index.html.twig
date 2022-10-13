@@ -65,10 +65,18 @@
 
 										</div>
 										<div class="modal-footer">
+										<form method="post" action="{{ url('indexLogin') }}archiveAnswers">
+												<input type="text" value="{{project.id}}" name="projectId" hidden>
+												<button type="submit" class="btn btn-danger btn-lg">Archiver les réponses</button>
+												
+											</form>
 											<form method="post" action="{{ url('indexLogin') }}archiveProject">
 												<input type="text" value="{{project.id}}" name="projectId" hidden>
-												<button type="submit" class="btn btn-danger btn-lg">Effacer un projet</button>
+												<button type="submit" class="btn btn-danger btn-lg">Effacer le projet</button>
+												
 											</form>
+											
+											
 										</div>
 									</div>
 								</div>

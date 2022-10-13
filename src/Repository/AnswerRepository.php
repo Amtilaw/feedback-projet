@@ -39,6 +39,18 @@ class AnswerRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByProjectId($value): array
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.id_project = :val')
+            ->setParameter('val', $value)
+            ->orderBy('a.id', 'ASC')
+            ->setMaxResults(100)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Answer[] Returns an array of Answer objects
 //     */
