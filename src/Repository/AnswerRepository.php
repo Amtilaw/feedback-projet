@@ -39,7 +39,6 @@ class AnswerRepository extends ServiceEntityRepository
         }
     }
 
-<<<<<<< HEAD
     public function findAllWithMoyenne()
     {
         $conn = $this->getEntityManager()->getConnection();
@@ -54,18 +53,6 @@ class AnswerRepository extends ServiceEntityRepository
 
         $stmt = $conn->prepare($sql);
         return $stmt->executeQuery()->fetchAllAssociative();
-=======
-    public function findByProjectId($value): array
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.id_project = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(100)
-            ->getQuery()
-            ->getResult()
-        ;
->>>>>>> d4feee0dd1f93905d849b8d3d34c9ae86db15917
     }
 
 //    /**

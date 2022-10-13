@@ -13,7 +13,6 @@ use App\Entity\Manager;
 use App\Repository\ManagerRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use App\Repository\AnswerRepository;
 
 
 class HomeManagerController extends AbstractController
