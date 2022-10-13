@@ -1,94 +1,95 @@
 {% extends 'base.html.twig' %}
-	
-
-	{% block title %}
-		Manager panel
 
 
-	{% endblock %}
+{% block title %}
+	Manager panel
 
-	{% block stylesheets %}
-		{{ parent() }}
-	{% endblock %}
 
-	{% block javascripts %}
-		{{ parent() }}
-	{% endblock %}
+{% endblock %}
 
-	{% block body %}
-		{% if ( connected == true ) %}
-	<!-- Navbar-->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#">Manager panel</a>
-			<div class="collapse navbar-collapse" id="navbarColor01">
-			<ul class="navbar-nav me-auto">
-			
-			</ul>
-			<div class="d-flex">
-				
-				<a href="{{ path("logout") }}" class="btn btn-secondary my-2 my-sm-0">Se déconnecter</a>
+{% block stylesheets %}
+	{{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	{% if ( connected == true ) %}
+		<!-- Navbar-->
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">Manager panel</a>
+				<div class="collapse navbar-collapse" id="navbarColor01">
+					<ul class="navbar-nav me-auto"></ul>
+					<div class="d-flex">
+
+						<a href="{{ path("logout") }}" class="btn btn-secondary my-2 my-sm-0">Se déconnecter</a>
+					</div>
+				</div>
 			</div>
-			</div>
-		</div>
-	</nav>
-		
+		</nav>
+
 		<!-- Content -->
-		<br />
+		<br/>
 		<div class="card border-primary mb-3" style="max-width: 90%; margin-left: auto; margin-right: auto;">
 			<div class="card-header">Projets</div>
 			<div class="card-body">
-			<h4 class="card-title">Affichage des projets</h4>
-			<p class="card-text">A partir de ce panel, vous pouvez clicker sur vos projets pour générer un questionnaire a partager avec vos collaborateurs</p>
+				<h4 class="card-title">Affichage des projets</h4>
+				<p class="card-text">A partir de ce panel, vous pouvez clicker sur vos projets pour générer un questionnaire a partager avec vos collaborateurs</p>
 
-			<div class="container">
-			<div class="d-flex justify-content-center">
-				{% for project in projects %}
-					<div>
-						<button type="button" data-toggle="modal" data-target="#modale{{project.id}}" class="card-header text-white bg-info mb-3" style="max-width: 20rem; margin-right: 10px;" >
-							{{project.name}}
-						</button>
-						
+				<div class="container">
+					<div class="d-flex justify-content-center">
+						{% for project in projects %}
+							{% if project.archived == 0 %}
+								<div>
+									<button type="button" data-toggle="modal" data-target="#modale{{project.id}}" class="card-header text-white bg-info mb-3" style="max-width: 20rem; margin-right: 10px;">
+										{{project.name}}
+									</button>
 
-					</div>
-					<div class="modal" id="modale{{project.id}}">
-					<div class="modal-dialog" role="document">
-					<div class="modal-content">
-					<div class="modal-header">
-					<h5 class="modal-title">URL : </h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true"></span>
-					</button>
-					</div>
-					<div class="modal-body">
-					<p>Partagez cet URL à vos collaborateurs : {{ url("app_quizz", {"idProject": project.id }) }}</p>
-					</div>
-					<div class="modal-footer">
-					</div>
-					</div>
-					</div>
-					</div>
-	
-				{% endfor %}
+
+								</div>
+								<div class="modal" id="modale{{project.id}}">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title">{{project.name}}
+												</h5>
+												<span aria-hidden="true"></span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<p>Partagez cet URL à vos collaborateurs :
+												{{ url("app_quizz", {"idProject": project.id }) }}</p>
+
+										</div>
+										<div class="modal-footer">
+											<form method="post" action="{{ url('indexLogin') }}archiveProject">
+												<input type="text" value="{{project.id}}" name="projectId" hidden>
+												<button type="submit" class="btn btn-danger btn-lg">Effacer un projet</button>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						{% endif %}
+					{% endfor %}
+				</div>
 			</div>
-		</div>
 
 		</div>
-		
+
 		<div class="container">
 			<div class="d-flex justify-content-end">
 				<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal">Add new project</button>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#deleteModal">Effacer un projet</button>
 			</div>
-			
-				
-			
-			<br />
-		</div>
-		
 
-		
+
+			<br/>
+		</div>
+
 
 		<div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
@@ -115,28 +116,28 @@
 		<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 		<script>
 			function addProject() {
-	let project = document.getElementById("project").value;
+let project = document.getElementById("project").value;
 
-	$.ajax({
-	type: "post",
-	url: "addProject",
-	data: {
-	name: project
-	}
-	}).done(function (response, textStatus, jqxhr) {
-	console.log("project added");
-	window.location.href = "panel";
-	}).fail(function (response) {
-	setTimeout(function () {
-	alert(response.responseJSON.message);
-	}, 500);
-	}).always(function () {});
+$.ajax({
+type: "post",
+url: "addProject",
+data: {
+name: project
+}
+}).done(function (response, textStatus, jqxhr) {
+console.log("project added");
+window.location.href = "panel";
+}).fail(function (response) {
+setTimeout(function () {
+alert(response.responseJSON.message);
+}, 500);
+}).always(function () {});
 
-	}
+}
 		</script>
 	{% else %}
 		<script>
-		window.location.href = "logout";
+			window.location.href = "logout";
 		</script>
 	{% endif %}
-	{% endblock %}
+{% endblock %}

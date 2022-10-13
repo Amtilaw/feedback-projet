@@ -52,4 +52,17 @@ class HomeManagerController extends AbstractController
         $entityManager->flush();
         return new JsonResponse(1);
     }
+
+    /**
+     * @Route("/archiveProject", name="archive_project")
+     */
+    public function archiveProject(ProjectRepository $projectRepository, Request $request, EntityManagerInterface $entityManager): Response
+    {
+
+        $idProject = intval($request->request->get('projectId'));
+        $project = $projectRepository->find($idProject);
+        $project->setArchived(1);
+        $entityManager->flush();
+        return $this->redirectToRoute('app_home_manager');
+    }
 }
