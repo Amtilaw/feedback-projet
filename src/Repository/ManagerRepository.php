@@ -39,6 +39,16 @@ class ManagerRepository extends ServiceEntityRepository
         }
     }
 
+    public function findOneByLogin($login): ?Manager
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.login = :val')
+            ->setParameter('val', $login)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+   }
+
 //    /**
 //     * @return Manager[] Returns an array of Manager objects
 //     */
