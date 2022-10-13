@@ -44,11 +44,31 @@
 			<div class="container">
 			<div class="d-flex justify-content-center">
 				{% for project in projects %}
-					<a href="">
-						<div class="card text-white bg-info mb-3" style="max-width: 20rem; margin-right: 10px;">
-							<div class="card-header">{{project.name}}</div>
-						</div>
-					</a>
+					<div>
+						<button type="button" data-toggle="modal" data-target="#modale{{project.id}}" class="card-header text-white bg-info mb-3" style="max-width: 20rem; margin-right: 10px;" >
+							{{project.name}}
+						</button>
+						
+
+					</div>
+					<div class="modal" id="modale{{project.id}}">
+					<div class="modal-dialog" role="document">
+					<div class="modal-content">
+					<div class="modal-header">
+					<h5 class="modal-title">URL : </h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true"></span>
+					</button>
+					</div>
+					<div class="modal-body">
+					<p>Partagez cet URL à vos collaborateurs : {{ url("app_quizz", {"idProject": project.id }) }}</p>
+					</div>
+					<div class="modal-footer">
+					</div>
+					</div>
+					</div>
+					</div>
+	
 				{% endfor %}
 			</div>
 		</div>

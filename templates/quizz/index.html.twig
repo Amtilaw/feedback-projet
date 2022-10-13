@@ -6,6 +6,14 @@
 
 {% endblock %}
 
+{% block stylesheets %}
+	{{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+{% endblock %}
+
 {% block body %}
 
 	<div class="container">
@@ -15,7 +23,7 @@
 
 	<div class="container">
 		<div class="formulaire">
-			<form method="post" action="/quizzRep">
+			<form method="post" action="{{ url('indexLogin') }}quizzRep">
 				<label for="Q1" class="form-label">Avez-vous apprécié la réalisation de ce projet ?
 					<span id="Q1A" style="color:green"></span>
 				</label>
