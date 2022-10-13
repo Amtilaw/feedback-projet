@@ -17,14 +17,23 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class HomeManagerController extends AbstractController
 {
     /**
-     * @Route("/home/manager", name="app_home_manager")
+     * @Route("/panel", name="app_home_manager")
      */
     public function index(ProjectRepository $projectRepository): Response
     {
         $allProject = $projectRepository->findAll();
+
+        if(isset($_SESSION['connected'])){
+            $connected = $_SESSION['connected'];
+        }else{
+            $connected = false;
+        }
+        
+
         return $this->render('home_manager/index.html.twig', [
             'controller_name' => 'HomeManagerController',
             'projects' => $allProject,
+            'connected' => $connected
         ]);
     }
 

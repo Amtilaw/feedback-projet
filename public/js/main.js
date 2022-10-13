@@ -24,7 +24,7 @@ $( document ).ready(function() {
             success: function(res){
                 console.log(res);
                 if(res['data'] == true){
-                    window.location.href = "/home/manager";
+                    window.location.href = location + "panel";
                 }else{
                     Swal.fire({
                     icon: 'error',

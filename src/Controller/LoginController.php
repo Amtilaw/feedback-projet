@@ -4,8 +4,11 @@ namespace App\Controller;
 
 use App\Repository\ManagerRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use phpDocumentor\Reflection\Types\Void_;
+use SebastianBergmann\Type\VoidType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -67,6 +70,21 @@ class LoginController extends AbstractController
         }
         
         
+    }
+
+
+    /**
+     * @Route("/logout", name="logout")
+     */
+    public function logout()
+    {
+        if(isset($_SESSION['idManager']) && $_SESSION['idManager'] != null ){
+            unset($_SESSION['idManager']);
+            unset($_SESSION['login']);
+            unset($_SESSION['connected']);
+            
+        }
+        return $this->redirectToRoute('indexLogin');
     }
 }
 
