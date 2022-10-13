@@ -62,12 +62,49 @@
 										<div class="modal-body">
 											<p>Partagez cet URL à vos collaborateurs :
 												{{ url("app_quizz", {"idProject": project.id }) }}</p>
-
+											{% for answer in allAnswer %}
+												{% if project.id == answer.id_project_id %}
+													<div class="container">
+														<div class="row justify-content-center">
+															Nombre de personne ayant participé :
+															{{answer.nombreQuizz}}
+															<div class="question">
+																Q1 :
+																{{answer.q1}}
+															</div>
+															<div class="question">
+																Q2 :
+																{{answer.q2}}
+															</div>
+															<div class="question">
+																Q3 :
+																{{answer.q3}}
+															</div>
+															<div class="question">
+																Q4 :
+																{{answer.q4}}
+															</div>
+															<div class="question">
+																Q5 :
+																{{answer.q5}}
+															</div>
+															<div class="question">
+																Q6 :
+																{{answer.q6}}
+															</div>
+															<div class="question">
+																Q7 :
+																{{answer.q7}}
+															</div>
+														</div>
+													</div>
+												{% endif %}
+											{% endfor %}
 										</div>
 										<div class="modal-footer">
 											<form method="post" action="{{ url('indexLogin') }}archiveProject">
 												<input type="text" value="{{project.id}}" name="projectId" hidden>
-												<button type="submit" class="btn btn-danger btn-lg">Effacer un projet</button>
+												<button type="submit" class="btn btn-danger btn-lg">Effacer le projet</button>
 											</form>
 										</div>
 									</div>

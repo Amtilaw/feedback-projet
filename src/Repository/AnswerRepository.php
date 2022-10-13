@@ -39,6 +39,22 @@ class AnswerRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAllWithMoyenne()
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql =
+
+            "  SELECT AVG(q1) as q1, AVG(q2) as q2, AVG(q3) as q3, AVG(q4) as q4, AVG(q5) as q5, AVG(q6) as q6, AVG(q7) as q7, id_project_id, COUNT(Q1) as nombreQuizz
+            FROM answer
+            
+            
+        ";
+
+        $stmt = $conn->prepare($sql);
+        return $stmt->executeQuery()->fetchAllAssociative();
+    }
+
 //    /**
 //     * @return Answer[] Returns an array of Answer objects
 //     */

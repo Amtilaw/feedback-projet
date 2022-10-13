@@ -12,6 +12,7 @@ use App\Entity\Manager;
 use App\Repository\ManagerRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Repository\AnswerRepository;
 
 
 class HomeManagerController extends AbstractController
@@ -19,10 +20,13 @@ class HomeManagerController extends AbstractController
     /**
      * @Route("/panel", name="app_home_manager")
      */
-    public function index(ProjectRepository $projectRepository): Response
+    public function index(ProjectRepository $projectRepository, AnswerRepository $answerRepository): Response
     {
         $allProject = $projectRepository->findAll();
 
+        $allAnswer = $answerRepository->findAllWithMoyenne();
+
+        dump($allAnswer);
         if(isset($_SESSION['connected'])){
             $connected = $_SESSION['connected'];
         }else{
@@ -33,7 +37,8 @@ class HomeManagerController extends AbstractController
         return $this->render('home_manager/index.html.twig', [
             'controller_name' => 'HomeManagerController',
             'projects' => $allProject,
-            'connected' => $connected
+            'connected' => $connected,
+            'allAnswer' => $allAnswer
         ]);
     }
 
