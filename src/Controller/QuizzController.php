@@ -47,8 +47,6 @@ class QuizzController extends AbstractController
         $entityManager->flush();
 
 
-        return $this->render('login/index.html.twig', [
-            'controller_name' => 'QuizzController',
-        ]);
+        return $this->redirectToRoute('indexLogin');
     }
 }
