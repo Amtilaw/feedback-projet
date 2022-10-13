@@ -58,7 +58,7 @@ class Answer
     private $q7;
 
     /**
-     * @ORM\ManyToOne(targetEntity=project::class)
+     * @ORM\ManyToOne(targetEntity=Project::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $id_project;

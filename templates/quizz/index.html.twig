@@ -15,42 +15,47 @@
 
 	<div class="container">
 		<div class="formulaire">
-			<label for="Q1" class="form-label">Avez-vous apprécié la réalisation de ce projet ?
-				<span id="Q1A" style="color:green"></span>
-			</label>
-			<input type="range" class="form-range" min="0" max="4" step="1" id="Q1" onchange="range('Q1')" onkeyup="range('Q1')">
+			<form method="post" action="/quizzRep">
+				<label for="Q1" class="form-label">Avez-vous apprécié la réalisation de ce projet ?
+					<span id="Q1A" style="color:green"></span>
+				</label>
+				<input type="range" class="form-range" min="0" max="4" step="1" id="Q1" onchange="range('Q1')" onkeyup="range('Q1')" name="q1">
 
-			<label for="Q2" class="form-label">Jugez-vous avoir eu assez de temps pour réaliser ce projet ?
-				<span id="Q2A" style="color:green"></span>
-			</label>
-			<input type="range" class="form-range" min="0" max="4" step="1" id="Q2" onchange="range('Q2')" onkeyup="range('Q2')">
+				<label for="Q2" class="form-label">Jugez-vous avoir eu assez de temps pour réaliser ce projet ?
+					<span id="Q2A" style="color:green"></span>
+				</label>
+				<input type="range" class="form-range" min="0" max="4" step="1" id="Q2" onchange="range('Q2')" onkeyup="range('Q2')" name="q2">
 
-			<label for="Q3" class="form-label">Avez-vous apprécié la collaboration avec vos collègues ?
-				<span id="Q3A" style="color:green"></span>
-			</label>
-			<input type="range" class="form-range" min="0" max="4" step="1" id="Q3" onchange="range('Q3')" onkeyup="range('Q3')">
+				<label for="Q3" class="form-label">Avez-vous apprécié la collaboration avec vos collègues ?
+					<span id="Q3A" style="color:green"></span>
+				</label>
+				<input type="range" class="form-range" min="0" max="4" step="1" id="Q3" onchange="range('Q3')" onkeyup="range('Q3')" name="q3">
 
-			<label for="Q4" class="form-label">Avez-vous rencontré des difficultés techniques pour la réalisation de ce projet ?
-				<span id="Q4A" style="color:green"></span>
-			</label>
-			<input type="range" class="form-range" min="0" max="4" step="1" id="Q4" onchange="range('Q4')" onkeyup="range('Q4')">
+				<label for="Q4" class="form-label">Avez-vous rencontré des difficultés techniques pour la réalisation de ce projet ?
+					<span id="Q4A" style="color:green"></span>
+				</label>
+				<input type="range" class="form-range" min="0" max="4" step="1" id="Q4" onchange="range('Q4')" onkeyup="range('Q4')" name="q4">
 
-			<label for="Q5" class="form-label">Comment jugez-vous votre entente avec les collaborateurs de ce projet ?
-				<span id="Q5A" style="color:green"></span>
-			</label>
-			<input type="range" class="form-range" min="0" max="4" step="1" id="Q5" onchange="range('Q5')" onkeyup="range('Q5')">
+				<label for="Q5" class="form-label">Comment jugez-vous votre entente avec les collaborateurs de ce projet ?
+					<span id="Q5A" style="color:green"></span>
+				</label>
+				<input type="range" class="form-range" min="0" max="4" step="1" id="Q5" onchange="range('Q5')" onkeyup="range('Q5')" name="q5">
 
-			<label for="Q6" class="form-label">Etes-vous satisfait du résultat de ce projet ?
-				<span id="Q6A" style="color:green"></span>
-			</label>
-			<input type="range" class="form-range" min="0" max="4" step="1" id="Q6" onchange="range('Q6')" onkeyup="range('Q6')">
+				<label for="Q6" class="form-label">Etes-vous satisfait du résultat de ce projet ?
+					<span id="Q6A" style="color:green"></span>
+				</label>
+				<input type="range" class="form-range" min="0" max="4" step="1" id="Q6" onchange="range('Q6')" onkeyup="range('Q6')" name="q6">
 
-			<label for="Q7" class="form-label">Est-ce que la charge de travaille est en accord avec un sprint?
-				<span id="Q7A" style="color:green"></span>
-			</label>
-			<input type="range" class="form-range" min="0" max="4" step="1" id="Q7" onchange="range('Q7')" onkeyup="range('Q7')">
+				<label for="Q7" class="form-label">Est-ce que la charge de travaille est en accord avec un sprint?
+					<span id="Q7A" style="color:green"></span>
+				</label>
+				<input type="range" class="form-range" min="0" max="4" step="1" id="Q7" onchange="range('Q7')" onkeyup="range('Q7')" name="q7">
 
+				<input type="text" value="{{idProject}}" hidden name="idProject" id="idProject">
 
+				<button type="submit" class="btn btn-primary">Envoyer</button>
+
+			</form>
 		</div>
 	</div>
 
