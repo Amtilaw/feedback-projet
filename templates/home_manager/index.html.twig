@@ -16,11 +16,11 @@
 	</div>
 
 	<div class="container">
-		<div class="d-flex justify-content-center">
+		<div class="row justify-content-center">
 			{% for project in projects %}
 				<a href="">
 					<div class="card text-white bg-info mb-3" style="max-width: 20rem;">
-						<div class="card-header">{{project.name}}</div>
+						<div class="card-header d-flex justify-content-center">{{project.name}}</div>
 					</div>
 				</a>
 			{% endfor %}
@@ -32,9 +32,6 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title">Add project</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true"></span>
-					</button>
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
@@ -44,7 +41,6 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" onclick="addProject()">Save changes</button>
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
