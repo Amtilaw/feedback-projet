@@ -57,7 +57,7 @@ class AnswerRepository extends ServiceEntityRepository
 
         $sql =
 
-            "  SELECT AVG(q1) as q1, AVG(q2) as q2, AVG(q3) as q3, AVG(q4) as q4, AVG(q5) as q5, AVG(q6) as q6, AVG(q7) as q7, id_project_id, COUNT(Q1) as nombreQuizz
+            "  SELECT ROUND(AVG(q1), 1) as q1, ROUND(AVG(q2),1) as q2, ROUND(AVG(q3), 1) as q3, ROUND(AVG(q4),1) as q4, ROUND(AVG(q5),1) as q5, ROUND(AVG(q6),1) as q6, ROUND(AVG(q7),1) as q7, id_project_id, COUNT(Q1) as nombreQuizz
             FROM answer
             GROUP BY id_project_id
             
